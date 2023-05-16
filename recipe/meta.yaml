@@ -17,10 +17,8 @@ requirements:
     - pip
     - python >=3.7
     - jupyter-packaging
-
   run:
     - python >=3.7
-
   run_constrained:
     - jupyterlab >=3,<5
 
@@ -29,7 +27,12 @@ test:
     - jupyterlab_widgets
   commands:
     - pip check
+    - jupyter labextension list
+    - jupyter labextension list 1>labextensions 2>&1
+    - grep -iE "@jupyter-widgets/jupyterlab-manager.*OK" labextensions
   requires:
+    - jupyterlab
+    - m2-grep  # [win]
     - pip
 
 about:
